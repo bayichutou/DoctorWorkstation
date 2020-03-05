@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+html, body, ul, li, section, div, select, input, main, p {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.fx {
+    display: flex;
+}
+
+.fg-1 {
+    flex-grow: 1;
+}
+
+.bg_main {
+    background-color: #f8f8f8;
+}
+
+.bg_fff {
+    background-color: #fff;
+}
+.fc_default{
+    color: #333 !important;
+}
+.fc_main {
+    color: #1784d1 !important;
+}
+
+.fc_red {
+    color: #ff4220 !important;
+}
+
+.fs_main {
+    font-size: 16px;
+}
+
+.fs_big {
+    font-size: 18px;
+}
+
+.text_c {
+    text-align: center;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.ml30 {
+    margin-left: 30px;
+}
+
+.h100 {
+    height: 100%;
+}
