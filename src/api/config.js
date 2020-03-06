@@ -9,18 +9,19 @@
  *   prod: '线上环境配置信息'
  * }
  */
-function conf (base = {}) {
-    if (process.env.NODE_ENV === 'production') { // 生产环境下
-        let env = process.env.ENV_CONFIG || 'dev'
-        return base[env] || base['dev']
-    }
-    // 开发环境
-    return base['dev']
+function conf(base = {}) {
+  if (process.env.NODE_ENV === "production") {
+    // 生产环境下
+    let env = process.env.ENV_CONFIG || "dev";
+    return base[env] || base["dev"];
+  }
+  // 开发环境
+  return base["dev"];
 }
 
 // PORTAL 接口
 export const POR_LOGIN_LOGOUT = conf({
-    dev: 'http://128.0.254.25:8997/api/',
-    test: 'http://`````',
-    prod: 'http://`````'
-})
+  dev: "http://128.0.254.25:8997/api/",
+  test: "http://`````",
+  prod: "http://`````"
+});
