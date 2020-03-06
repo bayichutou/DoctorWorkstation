@@ -37,10 +37,8 @@
     <el-col :span="16" class="table_content bg_main">
       <div v-if="printInfo.length">
         <div class="tools_wrap">
-          <el-button type="primary" @click="sendDrug">发药</el-button>
-          <el-button icon="el-icon-printer" v-print="'#table_dispending'"
-            >打印
-          </el-button>
+          <el-button type="primary" v-if="currentPatient.Status==1014" @click="sendDrug">发药</el-button>
+          <el-button icon="el-icon-printer" v-print="'#table_dispending'">打印</el-button>
         </div>
         <div id="table_dispending" class="table_wrap">
           <el-row class="table_title">
@@ -321,7 +319,6 @@ export default {
       this.currentPatient = this.patientList[index];
       this.printInfoObj = {};
       this.printInfo = [];
-      //this.$set(this.patientList);
       this.getPharmacyPrintInfo({
         Body: { VisitNo: this.patientList[index].VisitNo }
       });

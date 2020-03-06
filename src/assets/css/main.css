@@ -16,7 +16,9 @@ html, body, ul, li, section, div, select, input, main, p {
 .fg-1 {
     flex-grow: 1;
 }
-
+.page {
+    height: 100%;
+}
 .bg_main {
     background-color: #f8f8f8;
 }
