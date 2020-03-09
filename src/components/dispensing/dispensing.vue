@@ -2,15 +2,25 @@
   <el-row class="row_content" v-loading="loading">
     <el-col :span="8" class="cell_list">
       <div>
-        <el-select class="w100" v-model="value" placeholder="切换药房">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
+        <el-date-picker
+          class="w100"
+          v-model="date"
+          type="daterange"
+          range-separator="至"
+          format="yyyy 年 MM 月 dd 日"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+        <!--        <el-select class="w100" v-model="value" placeholder="切换药房">-->
+        <!--          <el-option-->
+        <!--            v-for="item in options"-->
+        <!--            :key="item.value"-->
+        <!--            :label="item.label"-->
+        <!--            :value="item.value"-->
+        <!--          >-->
+        <!--          </el-option>-->
+        <!--        </el-select>-->
       </div>
       <ul>
         <li
@@ -44,7 +54,7 @@
           </section>
         </li>
       </ul>
-      <NoData v-if="patientList.length" text="暂未查询到数据" />
+      <NoData v-if="!patientList.length" text="暂未查询到数据" />
     </el-col>
     <el-col :span="16" class="table_content bg_main">
       <div v-if="printInfo.length">
@@ -320,7 +330,8 @@ export default {
       printInfo: [],
       printInfoObj: {},
       options: yaofang,
-      value: "6999"
+      date:"",
+      //value: "6999"
     };
   },
   created() {

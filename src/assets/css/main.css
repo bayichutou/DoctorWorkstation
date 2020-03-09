@@ -9,7 +9,7 @@ html, body, ul, li, section, div, select, input, main, p {
     list-style: none
 }
 .w100{
-    width: 100%;
+    width: 100% !important;
 }
 .h100{
     height: 100%;
