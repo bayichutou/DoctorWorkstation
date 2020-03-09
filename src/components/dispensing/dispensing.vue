@@ -304,7 +304,7 @@ import {
   getNameDetail,
   getPharmacyPrintInfo,
   updateState
-} from "../../api/dispending_api.js";
+} from "./dispending_api.js";
 import  {yaofang} from './enum'
 
 export default {
