@@ -305,7 +305,7 @@ import {
   getPharmacyPrintInfo,
   updateState
 } from "./dispending_api.js";
-import  {yaofang} from './enum'
+import { yaofang } from "./enum";
 
 export default {
   name: "dispending",
@@ -419,7 +419,6 @@ body {
   border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-
 }
 
 .table_content {

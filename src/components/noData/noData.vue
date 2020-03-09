@@ -1,6 +1,10 @@
 <template>
   <div class="zwsj">
-    <img src="../../assets/images/platform/no_data.png" :width="imgW" :height="imgH" />
+    <img
+      src="../../assets/images/platform/no_data.png"
+      :width="imgW"
+      :height="imgH"
+    />
     <div style="color: #999;font-size: 12px;margin-top: 5px">{{ text }}</div>
   </div>
 </template>

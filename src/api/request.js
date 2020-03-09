@@ -45,7 +45,7 @@ export const requestData = (url, datas, timeout) => {
  * @param query
  * @returns {Promise<unknown>}
  */
-export const queryData = (query) => {
+export const queryData = query => {
   let tempQuery = "";
   if (config.url.indexOf("?") === -1) {
     tempQuery = "?";
