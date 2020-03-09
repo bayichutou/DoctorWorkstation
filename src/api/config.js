@@ -21,7 +21,7 @@ function conf(base = {}) {
 
 // PORTAL 接口
 export const POR_LOGIN_LOGOUT = conf({
-  dev: "http://128.0.254.25:8997/api/",
+  dev: process.env.VUE_APP_URL,
   test: "http://`````",
   prod: "http://`````"
 });

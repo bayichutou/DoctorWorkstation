@@ -9,5 +9,4 @@ export const porApi = axios.create({
     "Content-Type": "application/json"
   }
 });
-porApi.defaults.headers.get["Content-Type"] =
-  "application/x-www-form-urlencoded";
+porApi.defaults.headers.get["Content-Type"] = "application/x-www-form-urlencoded";

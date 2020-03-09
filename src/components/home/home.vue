@@ -16,24 +16,22 @@
       </div>
     </el-header>
     <el-container>
-      <!--      <el-aside width="201px">-->
-      <!--        <el-menu-->
-      <!--            default-active="1"-->
-      <!--            class="el-menu-vertical">-->
-      <!--          <el-menu-item index="1">-->
-      <!--            <i class="el-icon-location"></i>-->
-      <!--            <span slot="title">在线复诊</span>-->
-      <!--          </el-menu-item>-->
-      <!--          <el-menu-item index="2">-->
-      <!--            <i class="el-icon-menu"></i>-->
-      <!--            <span slot="title">医患交流</span>-->
-      <!--          </el-menu-item>-->
-      <!--          <el-menu-item index="4">-->
-      <!--            <i class="el-icon-setting"></i>-->
-      <!--            <span slot="title">发药</span>-->
-      <!--          </el-menu-item>-->
-      <!--        </el-menu>-->
-      <!--      </el-aside>-->
+      <el-aside width="201px">
+        <el-menu default-active="1" class="el-menu-vertical">
+          <el-menu-item index="1">
+            <i class="el-icon-location"></i>
+            <span slot="title">在线复诊</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-menu"></i>
+            <span slot="title">医患交流</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-setting"></i>
+            <span slot="title">发药</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
       <el-main class="page-content bg_main">
         <router-view></router-view>
       </el-main>
@@ -69,7 +67,7 @@ export default {
   min-width: 1400px;
 }
 
-/*.el-menu-vertical {*/
-/*  height: 100%;*/
-/*}*/
+.el-menu-vertical {
+  height: 100%;
+}
 </style>

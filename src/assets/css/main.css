@@ -8,7 +8,12 @@ html, body, ul, li, section, div, select, input, main, p {
     padding: 0;
     list-style: none
 }
-
+.w100{
+    width: 100%;
+}
+.h100{
+    height: 100%;
+}
 .fx {
     display: flex;
 }

@@ -1,6 +1,17 @@
 <template>
   <el-row class="row_content" v-loading="loading">
     <el-col :span="8" class="cell_list">
+      <div>
+        <el-select class="w100" v-model="value" placeholder="切换药房">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </div>
       <ul>
         <li
           class="cell"
@@ -33,12 +44,20 @@
           </section>
         </li>
       </ul>
+      <NoData v-if="patientList.length" text="暂未查询到数据" />
     </el-col>
     <el-col :span="16" class="table_content bg_main">
       <div v-if="printInfo.length">
         <div class="tools_wrap">
-          <el-button type="primary" v-if="currentPatient.Status==1014" @click="sendDrug">发药</el-button>
-          <el-button icon="el-icon-printer" v-print="'#table_dispending'">打印</el-button>
+          <el-button
+            type="primary"
+            v-if="currentPatient.Status == 1014"
+            @click="sendDrug"
+            >发药</el-button
+          >
+          <el-button icon="el-icon-printer" v-print="'#table_dispending'"
+            >打印</el-button
+          >
         </div>
         <div id="table_dispending" class="table_wrap">
           <el-row class="table_title">
@@ -163,9 +182,9 @@
             </el-col>
           </el-row>
           <el-row>
-            <!-- <el-col :span="3" >
-                            <div>R:</div>
-            </el-col>-->
+            <el-col :span="3">
+              <div>R:</div>
+            </el-col>
             <el-col :span="8">
               <div>药品名称</div>
             </el-col>
@@ -183,7 +202,9 @@
             <div v-for="(item, index) in printInfo" v-bind:key="index">
               <el-row>
                 <el-col :span="3">
-                  <!-- <div class="spec_info">0-1-3</div> -->
+                  <div class="spec_info">
+                    {{ item.StoreNum ? item.StoreNum : "-" }}
+                  </div>
                 </el-col>
                 <el-col :span="8">
                   <div class="spec_info">{{ item.DrugName }}</div>
@@ -278,21 +299,28 @@
 </template>
 
 <script>
+import NoData from "../noData/noData";
 import {
   getNameDetail,
   getPharmacyPrintInfo,
   updateState
 } from "../../api/dispending_api.js";
+import  {yaofang} from './enum'
 
 export default {
   name: "dispending",
+  components: {
+    NoData
+  },
   data() {
     return {
       loading: true,
       currentPatient: {},
       patientList: [],
       printInfo: [],
-      printInfoObj: {}
+      printInfoObj: {},
+      options: yaofang,
+      value: "6999"
     };
   },
   created() {
@@ -389,6 +417,9 @@ body {
   height: 100%;
   overflow-y: scroll;
   border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .table_content {
