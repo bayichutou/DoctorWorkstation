@@ -1,27 +1,6 @@
 <template>
   <el-row class="row_content" v-loading="loading">
     <el-col :span="8" class="cell_list">
-      <div>
-        <el-date-picker
-          class="w100"
-          v-model="date"
-          type="daterange"
-          range-separator="至"
-          format="yyyy 年 MM 月 dd 日"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        >
-        </el-date-picker>
-        <!--        <el-select class="w100" v-model="value" placeholder="切换药房">-->
-        <!--          <el-option-->
-        <!--            v-for="item in options"-->
-        <!--            :key="item.value"-->
-        <!--            :label="item.label"-->
-        <!--            :value="item.value"-->
-        <!--          >-->
-        <!--          </el-option>-->
-        <!--        </el-select>-->
-      </div>
       <ul>
         <li
           class="cell"
@@ -57,7 +36,10 @@
       <NoData v-if="!patientList.length" text="暂未查询到数据" />
     </el-col>
     <el-col :span="16" class="table_content bg_main">
-      <div v-if="printInfo.length">
+      <div class="tools_bar">
+        <el-button type="text" @click="dialog = true">筛选患者</el-button>
+      </div>
+      <div class="content_view" v-if="printInfo.length">
         <div class="tools_wrap">
           <el-button
             type="primary"
@@ -305,6 +287,56 @@
         </div>
       </div>
     </el-col>
+    <el-drawer
+      :before-close="handleClose"
+      :visible.sync="dialog"
+      direction="ltr"
+      custom-class="demo-drawer"
+      ref="drawer"
+    >
+      <div class="demo-drawer__content">
+        <el-form :model="form">
+          <el-form-item label="选择时间" :label-width="formLabelWidth">
+            <el-date-picker
+              class="date_picker"
+              v-model="date"
+              type="daterange"
+              range-separator="至"
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              @change="dateChange()"
+            >
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="选择药房" :label-width="formLabelWidth">
+            <el-select
+              v-model="value"
+              placeholder="切换药房"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div class="demo-drawer__footer">
+          <el-button size="medium" @click="cancelForm">取 消</el-button>
+          <el-button
+            size="medium"
+            type="primary"
+            @click="confirm"
+            :loading="loading"
+            >确 定</el-button
+          >
+        </div>
+      </div>
+    </el-drawer>
   </el-row>
 </template>
 
@@ -316,28 +348,60 @@ import {
   updateState
 } from "./dispending_api.js";
 import { yaofang } from "./enum";
+import {formatDate} from "../../api/util"
 
 export default {
-  name: "dispending",
+  name: "dispensing",
   components: {
     NoData
   },
   data() {
     return {
+      dialog: false,
       loading: true,
       currentPatient: {},
       patientList: [],
       printInfo: [],
       printInfoObj: {},
       options: yaofang,
-      date:"",
-      //value: "6999"
+      formLabelWidth: "80px",
+      form: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      },
+      date: [
+        formatDate(new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 7), 'yyyy-MM-dd'),
+        formatDate(new Date(), 'yyyy-MM-dd')
+      ],
+      value: ""
     };
   },
   created() {
     this.getNameDetail();
   },
   methods: {
+    handleClose(done) {
+      done();
+    },
+    confirm() {
+      this.getNameDetail();
+      this.$refs.drawer.closeDrawer();
+    },
+    cancelForm() {
+      this.loading = false;
+      this.dialog = false;
+      clearTimeout(this.timer);
+    },
+
+    dateChange() {
+      this.getNameDetail();
+    },
     sendDrug() {
       let that = this;
       updateState({
@@ -364,7 +428,14 @@ export default {
     },
     getNameDetail() {
       let that = this;
-      getNameDetail()
+      console.log(this.date[0].toString())
+      getNameDetail({
+        Body: {
+          DispensedPharmacyCode: this.value,
+          startDate: this.date[0],
+          endDate: this.date[1]
+        }
+      })
         .then(res => {
           this.loading = false;
           that.patientList = res.data.Data.PageList;
@@ -400,21 +471,11 @@ export default {
 </script>
 
 <style scoped>
-@page {
-  size: auto; /* auto is the initial value */
-  margin: 0mm; /* this affects the margin in the printer settings */
+.date_picker {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
 }
-
-html {
-  background-color: #ffffff;
-  margin: 0px; /* this affects the margin on the html before sending to printer */
-}
-
-body {
-  border: solid 1px blue;
-  margin: 10mm 15mm 10mm 15mm; /* margin you want for the content */
-}
-
 .row_content {
   height: 100%;
   overflow: hidden;
@@ -435,11 +496,31 @@ body {
 .table_content {
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   background-color: #fff;
 }
 
+.tools_bar {
+  width: 100%;
+  height: 44px;
+  background-color: #f3f3f3;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 15px;
+}
+
+.content_view {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .tools_wrap {
+  width: 21cm;
   display: flex;
   justify-content: flex-end;
   padding: 10px 0;
@@ -527,5 +608,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.demo-drawer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 30px;
+}
+.demo-drawer__footer {
+  display: flex;
+  justify-content: space-around;
 }
 </style>

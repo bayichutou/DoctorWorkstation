@@ -1,5 +1,9 @@
 export const yaofang = [
   {
+    value:"",
+    label:"全部"
+  },
+  {
     value: "6999",
     label: "西院急诊药房"
   },
@@ -32,11 +36,11 @@ export const yaofang = [
     label: "急诊药房"
   },
   {
-    value: "6997,",
+    value: "6997",
     label: "西院门诊药房"
   },
   {
-    value: "304,,",
+    value: "304",
     label: "皮肤科药房"
   },
   {

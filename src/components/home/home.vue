@@ -3,35 +3,35 @@
     <el-header class="header">
       <div class="logo"></div>
       <div>
-        <el-dropdown>
-          <el-avatar
-            style="transform: translate(-10px, 28%);"
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          />
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <!--                <span>王小虎</span>-->
+<!--        <el-dropdown>-->
+<!--          <el-avatar-->
+<!--            style="transform: translate(-10px, 28%);"-->
+<!--            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"-->
+<!--          />-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item>退出</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--        <span>王小虎</span>-->
       </div>
     </el-header>
     <el-container>
-      <el-aside width="201px">
-        <el-menu default-active="1" class="el-menu-vertical">
-          <el-menu-item index="1">
-            <i class="el-icon-location"></i>
-            <span slot="title">在线复诊</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">医患交流</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">发药</span>
-          </el-menu-item>
-        </el-menu>
-      </el-aside>
+<!--      <el-aside width="201px">-->
+<!--        <el-menu default-active="1" class="el-menu-vertical">-->
+<!--          <el-menu-item index="1">-->
+<!--            <i class="el-icon-location"></i>-->
+<!--            <span slot="title">在线复诊</span>-->
+<!--          </el-menu-item>-->
+<!--          <el-menu-item index="2">-->
+<!--            <i class="el-icon-menu"></i>-->
+<!--            <span slot="title">医患交流</span>-->
+<!--          </el-menu-item>-->
+<!--          <el-menu-item index="4">-->
+<!--            <i class="el-icon-setting"></i>-->
+<!--            <span slot="title">发药</span>-->
+<!--          </el-menu-item>-->
+<!--        </el-menu>-->
+<!--      </el-aside>-->
       <el-main class="page-content bg_main">
         <router-view></router-view>
       </el-main>
