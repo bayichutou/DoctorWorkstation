@@ -14,13 +14,13 @@ request.defaults.headers.get["Content-Type"] =
 /**
  * Post请求
  */
-export const requestData = (url, datas, timeout) => {
+export const requestData = (url, data, timeout) => {
   let options = Object.assign(
     {},
     {
       url: url,
       method: "POST",
-      data: datas
+      data: data
     }
   );
   if (timeout) {
@@ -51,13 +51,15 @@ export const queryData = query => {
     tempQuery = "?";
   }
   for (let key in query) {
-    if (
-      query[key] !== null &&
-      query[key] !== undefined &&
-      query[key] !== "" &&
-      query[key].length !== 0
-    ) {
-      tempQuery += "&" + key + "=" + query[key];
+    if (Object.prototype.hasOwnProperty.call(query, key)) {
+      if (
+        query[key] !== null &&
+        query[key] !== undefined &&
+        query[key] !== "" &&
+        query[key].length !== 0
+      ) {
+        tempQuery += "&" + key + "=" + query[key];
+      }
     }
   }
   let promise = new Promise((resolve, reject) => {

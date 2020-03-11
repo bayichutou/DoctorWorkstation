@@ -1,4 +1,4 @@
-export const yaofang = [
+export const pharmacyList = [
   {
     value:"",
     label:"全部"

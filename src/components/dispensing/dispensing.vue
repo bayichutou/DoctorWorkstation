@@ -316,7 +316,7 @@
               placeholder="切换药房"
             >
               <el-option
-                v-for="item in options"
+                v-for="item in pharmacyList"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -347,7 +347,7 @@ import {
   getPharmacyPrintInfo,
   updateState
 } from "./dispending_api.js";
-import { yaofang } from "./enum";
+import { pharmacyList } from "./enum";
 import {formatDate} from "../../api/util"
 
 export default {
@@ -363,7 +363,7 @@ export default {
       patientList: [],
       printInfo: [],
       printInfoObj: {},
-      options: yaofang,
+      pharmacyList: pharmacyList,
       formLabelWidth: "80px",
       form: {
         name: "",

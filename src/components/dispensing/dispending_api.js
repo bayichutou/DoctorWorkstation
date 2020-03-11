@@ -1,7 +1,6 @@
 import { requestData } from "../../api/request";
 
 export const getNameDetail = (data) => {
-  console.log(data);
   return requestData("Patient/GetPatientPageList", data);
 };
 
